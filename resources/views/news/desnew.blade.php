@@ -92,11 +92,10 @@
 		padding-bottom:10px;
 	}
 	#desnew_right p{
-		text-indent: 2em;
 		line-height: 1.5em;
 		color:#8C8C8C;
 	}
-	#desnew_left_issue>a{
+	#desnew_right_issue>a{
 	    border: 1px solid #1976d2;
 	    color: #1976d2;
 	    display: block;
@@ -113,6 +112,9 @@
 	}
 	#desnew_right_new div{
 		padding:5px 0px;
+	}
+	#desnew_right_notification p{
+		text-indent: 2em;
 	}
 </style>
 @stop
@@ -155,7 +157,7 @@
 		</div>
 	</div>
 	<div id="desnew_right"  class="col-md-4 clearfix">
-		<div id="desnew_left_issue">
+		<div id="desnew_right_issue">
 			<h4>快捷入口</h4>
 			<a  href="{{ url('news/create') }}">信息发布</a>
 		</div>

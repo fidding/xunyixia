@@ -102,8 +102,7 @@ class NewsController extends Controller
      * @return Response
      */
     public function show($id)
-    {
-        
+    { 
         //获取数据
         $new = News::find($id);
         //阅读次数+1
@@ -111,18 +110,27 @@ class NewsController extends Controller
         $new->save();
         $navsub = $new->type_id+1;
         $new->type_id = $new->type()->first()->type;
-        $new->time = date('Y-m-d',$new->time);//将时间戳转为日期格式        
+        //将时间戳转为日期格式
+        $new->time = date('Y-m-d',$new->time);
+        //将地址编码号转为地址
+        $new->addresscode =  Excity::where('id',$new->addresscode)->first()->city;
+        if($new->isfind)
+        $new->isfind = '已寻回';
+        else
+        $new->isfind = '寻找中';
         $user = $new->user()->first();
         //获取图片
-        $photo = Photo::where('new_id',$new->id)->get()->toArray();
+        $photo = Photo::where('new_id',$new->id)->get();
         //获取回复
-        $msg = Message::where('new_id',$new->id)->get()->toArray();
+        $msg = Message::where('new_id',$new->id)->get();
         if(count($msg)){
             foreach ($msg as $key => &$m) {
-                $m['user_id'] = User::find($m['user_id'])->first()->name;
+                $m->user_id = User::find($m->user_id)->first()->name;
             }
         }
-        return View::make('news.new',['new'=>$new,'user'=>$user,'photo'=>$photo,'msg'=>$msg,'navsub'=>$navsub]);
+        //获取最新信息
+        $lastNews = News::lastNews();
+        return View::make('news.new',['new'=>$new,'user'=>$user,'photo'=>$photo,'msg'=>$msg,'lastNews'=>$lastNews,'navsub'=>$navsub]);
     }
 
     /**

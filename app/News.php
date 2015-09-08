@@ -18,4 +18,9 @@ class News extends Model
 	public function type(){
 		return $this->belongsTo('App\Type');
 	}
+	//返回最新信息数据
+	static function lastNews(){
+		$news = new News;
+		return $news->orderBy('created_at','desc')->get();
+	}
 }
