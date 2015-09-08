@@ -1,0 +1,230 @@
+@CHARSET "UTF-8";
+body{
+/* 	background-color:#22282E; */
+	padding:0;
+	margin:0;
+	width:100%;
+	height:100%;
+	font-family:"Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;
+}
+/* jh-start */
+/* 容器（无标题） */
+.jh-mini-container{
+	padding: 50px 0px;
+}
+/* 容器(有标题) */
+.jh-container{
+	padding: 70px 20px;
+}
+.jh-container-title{
+	z-index: 1;
+	position: relative;
+	text-align: center;
+	margin-bottom: 50px;
+}
+.jh-container-title h2{
+	position: relative;
+	margin-bottom: 15px;
+	padding-bottom: 20px;
+	text-transform: uppercase;
+	font-size:28px;
+}
+.jh-container-title h2:after{
+	bottom: 0;
+	left: 50%;
+	height: 2px;
+	width: 70px;
+	content: " ";
+	margin-left: -35px;
+	position: absolute;
+	background: #3498db;	
+}
+.jh-container-title p{
+	font-size: 17px;
+	font-weight: 200;
+}
+.jh-container-content{
+}
+/* 背景 */
+.jh-bg-gray{
+	background: #f7f7f7;
+	border-top: solid 1px #eee;
+	border-bottom: solid 1px #eee;
+}
+/* 文字白 */
+.jh-white,.jh-white h2,.jh-white p{
+	color:#fff;
+}
+/* 文字灰 */
+.jh-gray,.jh-gray h2,.jh-gray p{
+	color:#333;
+}
+/* 文字两端对齐 */
+.jh-text-just{
+	text-align: justify;
+}
+/* 深黑色格网 */
+.jh-grid-black:before{
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	position: absolute;
+	background: url(../img/gridtile.png) repeat;
+}
+.jh-grid-black:after{
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	position: absolute;
+	background: rgba(0,0,0,0.7);		
+}
+/* 灰色格网 */
+.jh-grid-gray:before{
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	position: absolute;
+	background: url(../img/gridtile.png) repeat;
+}
+.jh-grid-gray:after{
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	position: absolute;
+	background: rgba(0,0,0,0.45);		
+}
+/* 浅黑色格网 */
+.jh-grid-white:before{
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	position: absolute;
+	background: url(../img/gridtile.png) repeat;
+}
+.jh-grid-white:after{
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: " ";
+	position: absolute;
+	background: rgba(0,0,0,0.2);		
+}
+/* 
+*jh按钮
+ */
+.jh-btn-green{
+	color: #fff;
+ 	background: #57b382;
+	border: #4ba575;	
+ }
+.jh-btn-green:hover{
+	color: #f2f2f2;
+	background: #4fae7b;
+	text-decoration: none;		
+}
+/* 
+*主页
+ */
+.home-container{
+	text-align: center;
+	max-height: 650px;
+  	overflow: hidden;
+}
+.home-wrapper{
+	padding-top: 12%;
+	width:100%;
+	height:100%;
+}
+.home-wrapper h1{
+	font-size: 3.5em;
+}
+.home-wrapper h1,h2,h3,h4{
+	color:#fff;
+}
+.home-wrapper .issue{
+	font-size: 17px;
+	margin-top:30px;
+	width: 150px;
+	height: 45px;
+	line-height:33px;
+}
+/* 
+*发布信息页
+ */
+.issue-container h1,h2,h4{
+	color:#777;
+}
+/* 
+*登录、注册、找回密码
+ */
+.lr-container{
+ 	width:100%;
+ 	height:100%;
+ 	position: absolute;
+ 	background: -webkit-gradient(radial,center center,0,center center,100%,color-stop(0%,#353644),color-stop(100%,#202029));
+  	background: -webkit-radial-gradient(center,ellipse cover,#353644 0,#2A2B36 100%);
+  	background: -o-radial-gradient(center,ellipse cover,#353644 0,#202029 100%);
+  	background: -ms-radial-gradient(center,ellipse cover,#353644 0,#202029 100%);
+  	background: radial-gradient(ellipse at center,#353644 0,#202029 100%);
+ }
+.lr-wrapper{
+	width: 330px;
+	min-height: 440px;
+	position: absolute;
+	margin-top: -220px;
+	margin-left: -175px;
+	top: 45%;
+	left: 50%;
+ }
+.lr-logo{
+ 	height: 80px;
+ 	background-size: 240px;
+  	background-position: center center;
+  	background-repeat: no-repeat;
+  	margin-bottom: 10px;
+ }
+.lr-form{
+	background: #fff;
+	padding: 30px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+.lr-form .form-control{
+	height:40px;
+}
+.lr-form .checkbox{
+	color:#777;
+}
+.lr-form .lr-submit{
+	width:100%;
+	height:42px;
+}
+.lr-form p{
+	margin: 15px 0 0 0;
+	color: #777;
+	font-size:12px;
+	text-align:center;
+	line-height: 2em;
+	min-height: 20px;
+}
+.lr-wrapper .lr-footer{
+	padding: 12px 0;
+	text-align: center;
+}
+.lr-wrapper .lr-footer a{
+	font-size:12px;
+	color: #777;
+	text-decoration: none;
+}
