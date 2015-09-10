@@ -38,7 +38,9 @@ class NewsController extends Controller
     public function create()
     {
         //
-        return View::make('issue',array('navsub'=>'1'));
+        //获取最新信息
+        $lastNews = News::lastNews();
+        return View::make('news.issue',['lastNews'=>$lastNews,'navsub'=>'1']);
     }
 
     /**
@@ -166,33 +168,29 @@ class NewsController extends Controller
     {
         //
     }
-    //获取指定type的信息数据
-    public function desnew($type){
-        $news = News::where('type_id',$type)->paginate(6);
-        foreach($news as &$new){
-            $new->user_id = User::where('id',$new->user_id)->first()->name;
-            $new->addresscode = Excity::where('id',$new->addresscode)->first()->city;
-            $msg_count = Message::where('new_id',$new->id)->count();
-            $new->msg_count = $msg_count;
-        }
-        return $news;  
-    }
     public function seeksth(){
-        $news = $this->desnew(1);
-        return View::make('news.desnew',['news'=>$news,'type'=>'寻物启事','navsub'=>2]);
+        $news = News::desnew(1);
+        //获取最新信息
+        $lastNews = News::lastNews();        
+        return View::make('news.desnew',['news'=>$news,'lastNews'=>$lastNews,'type'=>'寻物启事','navsub'=>2]);
     }
-
     public function loststh(){
-        $news = $this->desnew(2);
-        return View::make('news.desnew',['news'=>$news,'type'=>'失物招领','navsub'=>3]);
+        $news = News::desnew(2);
+        $lastNews = News::lastNews();
+        return View::make('news.desnew',['news'=>$news,'lastNews'=>$lastNews,'type'=>'失物招领','navsub'=>3]);
     }
     public function people(){
-        $news = $this->desnew(3);
-        return View::make('news.desnew',['news'=>$news,'type'=>'寻人启事','navsub'=>4]);
+        $news = News::desnew(3);
+        $lastNews = News::lastNews();
+        return View::make('news.desnew',['news'=>$news,'lastNews'=>$lastNews,'type'=>'寻人启事','navsub'=>4]);
     }
     public function pet(){
-        $news = $this->desnew(4);
-        return View::make('news.desnew',['news'=>$news,'type'=>'寻宠启事','navsub'=>5]);
+        $news = News::desnew(4);
+        $lastNews = News::lastNews();
+        return View::make('news.desnew',['news'=>$news,'lastNews'=>$lastNews,'type'=>'寻宠启事','navsub'=>5]);
     }
-
+    public function lastNews(){
+        $lastNews = News::lastAllNews();
+        return View::make('news.desnew',['news'=>$lastNews,'lastNews'=>$lastNews,'type'=>'最新信息','navsub'=>1]);
+    }
 }

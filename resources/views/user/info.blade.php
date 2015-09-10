@@ -1,0 +1,11 @@
+@extends('layouts.user')
+@section('title')
+用户中心-寻一下
+@stop
+@section('usercss')
+@stop
+@section('userjs')
+@stop
+@section('userbody')
+23423423424
+@stop

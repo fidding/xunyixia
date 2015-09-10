@@ -25,8 +25,6 @@ class UsersController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('chrome');
-        $this->middleware('login',array('only'=>array('show','edit','update')));
     }
     /**
      * Display a listing of the resource.
@@ -105,13 +103,7 @@ class UsersController extends Controller
     public function show()
     {
         //
-        $user=User::find(Auth::id());
-        
-        $excity=DB::table('ex_cities')->where('id', '=', $user->addresscode)->pluck('city');;
-        //$excity=Excity::find(Auth::user()->addresscode)->city;
-        $user->addresscode=$excity;
-        $excities=DB::table('ex_cities')->where('id', 'like', '__0000')->get();
-        return View::make('users.user')->with(array('user'=>$user,'excities'=>$excities,'navsub'=>'1'));
+        return View::make('user.info',['navsub'=>1]);
     }
 
     /**

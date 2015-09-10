@@ -33,10 +33,12 @@ Route::get('news/loststh','NewsController@loststh');
 Route::get('news/seeksth','NewsController@seeksth');
 Route::get('news/people','NewsController@people');
 Route::get('news/pet','NewsController@pet');
+Route::get('news/lastNews','NewsController@lastNews');
 Route::resource('news','NewsController');
 Route::resource('photos','PhotosController');
 //信息回复
 Route::resource('message','MessagesController');
+Route::get('user/info','UsersController@show');
 //主页
 Route::get('/', function () {
     return view('home',array('navsub'=>0));

@@ -1,6 +1,6 @@
 @extends('layouts.home')
 @section('title')
-寻一下 信息中心
+{{ $type }}-寻一下
 @stop
 @section('homecss')
 {!! HTML::style('css/bootstrap-datetimepicker.min.css') !!}
@@ -116,6 +116,26 @@
 	#desnew_right_notification p{
 		text-indent: 2em;
 	}
+	.issue-lookmore{
+		cursor:pointer;
+		padding: 5px 12px;
+		display: inline-block;
+		font-size: 12px;
+		font-weight: 700;
+		line-height: 1;
+		color: #3875ac;
+		background-color:#fff;
+		border:1px solid #3875ac;
+		text-align: center;
+		white-space: nowrap;
+		vertical-align: baseline;
+		border-radius: 10px;
+	}
+	.issue-lookmore:hover{
+		background-color:#3875ac;
+		color:#fff;
+		text-decoration: none;
+	}	
 </style>
 @stop
 @section('homebody')
@@ -162,7 +182,7 @@
 			<a  href="{{ url('news/create') }}">信息发布</a>
 		</div>
 		<div id="desnew_right_notification">
-			<h4>最新公告</h4>
+			<h4>最新公告<a class="issue-lookmore pull-right" href="{{ url('news/notifications') }}">更多</a></h4>
 			<p>"寻一下"致力打造全国最专业的寻物启事及失物招领信息发布平台，不管你是丢失了东西或是捡到了物品，都可以到这里来发布信息，让失主尽快找到失物。 
 			</p>
 			<p>
@@ -170,10 +190,10 @@
 			</p>
 		</div>
 		<div id="desnew_right_new">
-			<h4>最新信息</h4>
-			@if(count($news))
-				@foreach($news as $new)
-					<div><a href="{{ url('news/'.$new->id) }}">{{ $new->title?$new->title:'该主人很懒,尚未发布标题信息' }}</a><span class="pull-right">{{ Date::parse($new->created_at)->diffForHumans()}}创建</span></div>
+			<h4>最新信息<a class="issue-lookmore pull-right" href="{{ url('news/lastNews') }}">更多</a></h4>
+			@if(count($lastNews))
+				@foreach($lastNews as $lastNew)
+					<div><a href="{{ url('news/'.$lastNew->id) }}">{{ $lastNew->title?$lastNew->title:'该主人很懒,尚未发布标题信息' }}</a><span class="pull-right">{{ Date::parse($lastNew->created_at)->diffForHumans()}}创建</span></div>
 				@endforeach
 			@endif
 		</div>

@@ -154,7 +154,7 @@
 		</ul>
 	    <ul class="nav navbar-nav navbar-right">
 				<li class="nav-item	@if($navsub=='1') active @endif">
-					{!! HTML::link('news/create','发布信息',array('id'=>''))  !!}
+					{!! HTML::link('news/create','信息发布',array('id'=>''))  !!}
 				</li>
 				<li class="nav-item	@if($navsub=='2') active @endif">
 					{!! HTML::link('news/seeksth','寻物启事',array('id'=>''))  !!}
