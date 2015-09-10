@@ -1,6 +1,7 @@
 body {
     margin-top: 100px;
     background-color: #222;
+    font-family: "Hiragino Sans GB", "Microsoft YaHei","WenQuanYi Micro Hei", sans-serif;
 }
 
 @media(min-width:768px) {
@@ -134,7 +135,9 @@ ul.alert-dropdown {
 .side-nav>li>ul {
     padding: 0;
 }
-
+.side-nav>li>a>i{
+    padding:0px 5px;
+}
 .side-nav>li>ul>li>a {
     display: block;
     padding: 10px 15px 10px 38px;
@@ -145,4 +148,8 @@ ul.alert-dropdown {
 .side-nav>li>ul>li>a:hover {
     color: #fff;
 }
-
+.page-header{
+    padding-bottom: 15px;
+    margin: 40px 0 20px;
+    border-bottom: 1px solid #eee;   
+}

@@ -6,14 +6,15 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App;
-use View,
-    Excel;
-
-class HomesController extends Controller
+use App\User,
+    App\Feedback;
+use Auth,
+    View,
+    Input,
+    Response,
+    Redirect;
+class FeedbacksController extends Controller
 {
-    public function __construct(){
-    }
     /**
      * Display a listing of the resource.
      *
@@ -22,7 +23,6 @@ class HomesController extends Controller
     public function index()
     {
         //
-        return View::make('home',array('navsub'=>'0'));
     }
 
     /**
@@ -33,6 +33,8 @@ class HomesController extends Controller
     public function create()
     {
         //
+        $user = Auth::user();
+        return View::make('users.feedback',array('user'=>$user,'navsub'=>'4'));
     }
 
     /**
@@ -44,6 +46,17 @@ class HomesController extends Controller
     public function store(Request $request)
     {
         //
+        $data = Input::all();
+        $feedback = new Feedback();
+        $feedback->fill($data);
+        if(Auth::check())
+        {
+            $feedback->user_id = Auth::id();
+        }else{
+            $feedback->user_id = 0;
+        }
+        $feedback->save();
+        return Redirect::back()->with('msg', '意见反馈成功');  
     }
 
     /**

@@ -10,7 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
+//主页
+Route::get('/', 'HomesController@index');
+Route::get('home', 'HomesController@index');
 //登录
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -36,12 +38,15 @@ Route::get('news/pet','NewsController@pet');
 Route::get('news/lastNews','NewsController@lastNews');
 Route::resource('news','NewsController');
 Route::resource('photos','PhotosController');
+//用户中心
+Route::get('users/info','UsersController@info');
+Route::get('users/password','UsersController@password');
+Route::post('users/updatePwd','UsersController@updatePwd');
+Route::resource('users','UsersController');
 //信息回复
 Route::resource('message','MessagesController');
-Route::get('user/info','UsersController@show');
-//主页
-Route::get('/', function () {
-    return view('home',array('navsub'=>0));
-});
-Route::controller('','HomesController');
+//消息反馈
+Route::resource('feedback','FeedbacksController');
+
+
 

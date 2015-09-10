@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User,
+    App\Excity,
     App\Message,
     App\Project;
 use View,
@@ -100,10 +101,9 @@ class UsersController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show()
+    public function show($id)
     {
         //
-        return View::make('user.info',['navsub'=>1]);
     }
 
     /**
@@ -127,8 +127,8 @@ class UsersController extends Controller
     public function update(Request $request)
     {
         //
-        $input=Input::all();
-        $excity=DB::table('ex_cities')->where('id', '=', $input['addresscode'])->get();
+        $input = Input::all();
+        $excity = Excity::where('id',$input['addresscode'])->get();
         if($excity){
             $user = User::find(Auth::id());
             $user->fill($input);
@@ -154,37 +154,17 @@ class UsersController extends Controller
     {
         return View::make('users.login',array('navsub'=>'-1'));
     }
-    /*
-     * 登录验证
-     * 表单输入  email  password
-     * 输出  成功：json  失败:json
-     * 
-     * 
-     * 
-     * */
-    public function check()
-    {
-        $input=Input::all();
-        if (Auth::attempt(array('email' => $input['email'], 'password' => $input['password']),Input::has('rember')))
-        {
-            return Redirect::to('projects');
-            $back = Session::get('urlback')?Session::get('urlback'):'projects';
 
-            return Redirect::intended($back);
-        }else{
-            return Redirect::to('login')->withInput()->with('error', '邮箱或密码不正确');;
-        }
-    }
-
-    public function logout()
+    public  function info()
     {
-        Auth::logout();
-        return Redirect::to('home')->with('msg', '成功退出！');
+        $user = Auth::user();
+        return View::make('users.info',['user'=>$user,'navsub'=>1]);
+        
     }
     
-    public function editPwd()
+    public function password()
     {
-        return View::make('password.editPwd',array('navsub'=>'2'));
+        return View::make('users.password',array('navsub'=>'2'));
     }
     
     public function updatePwd()
@@ -194,19 +174,19 @@ class UsersController extends Controller
         $new_password=$input['new_password'];
         $password_confirmation=$input['password_confirmation'];
         if($new_password!=$password_confirmation)
-        return Redirect::back()->with('msg', '两次输入密码不同！');
-        $id = Auth::id();
-        $user = User::find($id);
-        if (Hash::check($password,$user['password'] ))
-        {
-            $user->password=Hash::make($new_password);
-            $user->save();
-            return Redirect::back()->with('msg', '修改成功！');
-        }
-        else
-        {
-            return Redirect::back()->with('msg', '原密码不正确！');
-        }
+            return Redirect::back()->with('msg', '两次输入密码不同！');
+            $id = Auth::id();
+            $user = User::find($id);
+            if (Hash::check($password,$user['password'] ))
+            {
+                $user->password=Hash::make($new_password);
+                $user->save();
+                return Redirect::back()->with('msg', '修改成功！');
+            }
+            else
+            {
+                return Redirect::back()->with('msg', '原密码不正确！');
+            }
     }
     
     public function test()

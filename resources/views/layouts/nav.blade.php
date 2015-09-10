@@ -138,7 +138,7 @@
 		<ul class="nav navbar-nav navbar-right">
 		@if(Auth::check())
 		<li class="nav-item">
-		<a href="{{ url('main') }}" ><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }}</a>
+		<a href="{{ url('users/info') }}" ><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }}</a>
 		</li>
 		<li class="nav-item">
 		<a href="{{ url('auth/logout') }}"><span class="glyphicon glyphicon-off"></span> 退出 </a>
