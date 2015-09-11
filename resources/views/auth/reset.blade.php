@@ -25,7 +25,7 @@
             </p>
         </form>
         <div class="lr-footer">
-            <a>京ICP备13019086号</a>&nbsp; <a>京公网安备11010502024565</a>
+            <a href="http://www.miitbeian.gov.cn/">闽ICP备15018320号</a>
         </div>
     </div>
 </div>
