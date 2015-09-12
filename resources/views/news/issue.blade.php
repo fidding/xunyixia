@@ -32,6 +32,9 @@
 		min-height:120px;
 		overflow: hidden;
 	}
+	#issue_left_error{
+		list-style: none;
+	}
 	#issue_left_form .input-group.form-date{
 		padding-right: 15px;
 		padding-left: 15px;
@@ -117,9 +120,17 @@
 				&nbsp;信息发布
 			</span>		
 		</div>
+		@if($errors->any())
+        <ul id="issue_left_error" class="col-md-10 col-md-offset-1 col-xs-12 alert alert-danger">
+            @foreach($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+		@endif		
 		{!! Form::open(array('url' => 'news','method'=>'post', 'files' => true,'id'=>'issue_left_form','class'=>'form-horizontal')) !!}
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="title"><b class="i-red">*</b>信息类型</label>
+				{{ old('type_id') }}
 				<div class="col-sm-8">
 					<select name="type_id" class="form-control">
 					  <option value="1" selected="selected">寻物启事</option>
@@ -132,13 +143,13 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="title"><b class="i-red">*</b>信息标题</label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="title" name="title" placeholder="标题(必填)">
+					<input type="text" class="form-control" id="title" value="{{ old('title') }}" name="title" placeholder="标题(必填)">
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="time" class="col-sm-3 control-label"><b class="i-red">*</b>丢失日期</label>
 				<div class="input-group date form-date col-sm-8" data-date="" data-date-format="dd MM yyyy" data-link-field="time" data-link-format="yyyy-mm-dd">
-					<input name="time" id="time"  class="form-control" size="16" type="text" value="" readonly="readonly">
+					<input name="time" id="time"  class="form-control" size="16" type="text" value="{{ old('time') }}" readonly="readonly">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
 					<span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
 				</div>
@@ -163,62 +174,62 @@
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="address">详细地点</label>
 				<div class="col-sm-8">
-					<input type="text" class="form-control" id="address" name="address" placeholder="详细地点">
+					<input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" placeholder="详细地点">
 				</div>
 			</div>	
 			<div class="form-group">
 				<label for="description" class="col-sm-3 control-label"><b class="i-red">*</b>详细描述</label>
 		    	<div class="col-sm-8">
-		   			<textarea class="form-control" id="description" name="description"></textarea>
+		   			<textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
 		   		</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="image">上传图片</label>
 				<div class="col-sm-8">
-					<input id="issue_image" name="image[]" type="file" class="file" multiple="true">
+					<input id="issue_image" name="image[]" type="file" value="{{ old('image[]') }}" class="file" multiple="true">
 				</div>				
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="c_name"><b class="i-red">*</b>联系人</label>
 				<div class="col-sm-8">
-					<input type="text" name="c_name" class="form-control" id="c_name" placeholder="联系人姓名(必填)">
+					<input type="text" name="c_name" class="form-control" value="{{ old('c_name') }}" id="c_name" placeholder="联系人姓名(必填)">
 				</div>
 			</div>	
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="c_address"><b class="i-red">*</b>联系地址</label>
 				<div class="col-sm-8">
-					<input type="text" name="c_address" class="form-control" id="c_address" placeholder="联系地址(必填)">
+					<input type="text" name="c_address" class="form-control" value="{{ old('c_address') }}"  id="c_address" placeholder="联系地址(必填)">
 				</div>
 			</div>		
 	
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="c_mobilephone"><b class="i-red">*</b>手机</label>
 				<div class="col-sm-8">
-					<input type="text" name="c_mobilephone" class="form-control" id="c_mobilephone" placeholder="联系手机号(必填)">
+					<input type="text" name="c_mobilephone" class="form-control" value="{{ old('c_mobilephone') }}" id="c_mobilephone" placeholder="联系手机号(必填)">
 				</div>			
 			</div>		
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="c_phone">座机</label>
 				<div class="col-sm-8">	
-					<input type="text" name="c_phone" class="form-control" id="c_phone" placeholder="联系座机号(可选)">
+					<input type="text" name="c_phone" class="form-control" value="{{ old('c_phone') }}" id="c_phone" placeholder="联系座机号(可选)">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="c_email">邮箱</label>
 				<div class="col-sm-8">
-					<input type="text" name="c_email" class="form-control" id="c_email" placeholder="联系邮箱地址(可选)">
+					<input type="text" name="c_email" class="form-control" value="{{ old('c_email') }}" id="c_email" placeholder="联系邮箱地址(可选)">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="c_qq">QQ</label>
 				<div class="col-sm-8">
-					<input type="text" name="c_qq" class="form-control" id="c_qq" placeholder="联系QQ号(可选)">
+					<input type="text" name="c_qq" class="form-control" value="{{ old('c_qq') }}"  id="c_qq" placeholder="联系QQ号(可选)">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-sm-3 control-label" for="c_wechat">微信</label>
 				<div class="col-sm-8">
-					<input type="text" name="c_wechat" class="form-control" id="c_wechat" placeholder="联系微信号(可选)">
+					<input type="text" name="c_wechat" class="form-control" value="{{ old('c_wechat') }}"  id="c_wechat" placeholder="联系微信号(可选)">
 				</div>
 			</div>
 			<div class="form-group">

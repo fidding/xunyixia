@@ -6,9 +6,13 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Message;
+use App\Message,
+    App\News,
+    App\User,
+    App\Type;
 use Input,
-    Auth;
+    Auth,
+    Mail;
 class MessagesController extends Controller
 {
     /**
@@ -30,7 +34,6 @@ class MessagesController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -49,6 +52,26 @@ class MessagesController extends Controller
             $msg->user_id = 1;
         }
         $msg->save();
+        /*
+        *寻一下-信息邮件提示
+        */
+        $new_id = $input['new_id'];
+        $new = News::find($input['new_id']);
+        $user = User::find($new->user_id);
+        $type = Type::find($new->type_id);
+        //如果信息联系邮件c_email不为空或者用户为注册用户
+        if($new->c_email||$new->user_id != 1){
+            Mail::send('emails.replay', ['new' => $new,'user' => $user,'type' => $type], function($message) use($new,$user)
+            {
+                if($new->c_email){
+                    $email = $new->c_email;   
+                }else{
+                    $email = $user->email;
+                }
+                $name = $new->c_name;
+                $message->to($email, $new->c_name)->subject('寻一下-信息回复提示');
+            });
+        }       
     }
 
     /**

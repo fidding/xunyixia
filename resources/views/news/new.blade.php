@@ -238,7 +238,7 @@
 			@endif
 			<hr>
 			<div class="new_left_block_title form-group">
-				<i class="icon-comments-alt"></i>&nbsp;评论
+				<i class="icon-comments-alt"></i>&nbsp;评论({{ count($msg)?count($msg):1 }})
 			</div>
 			<div id="new_left_message">
 				<ul class="col-md-12">

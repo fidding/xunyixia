@@ -114,8 +114,16 @@ return [
 	*/
 
 	'attributes' => [
-		'name' => '姓名',
-		'password' => '密码',
-		'email' => '邮箱'
+		'name'          => '姓名',
+		'password'      => '密码',
+		'email'         => '邮箱',
+        'type_id'       =>  '信息类型',
+        'title'         =>  '信息标题',
+        'description'   =>  '详细描述',
+        'time'          =>  '丢失日期',
+        'addresscode'   =>  '丢失区域',
+        'c_name'        =>  '联系人',
+        'c_address'     =>  '联系地址',
+        'c_mobilephone' =>  '手机'
 	],
 ];

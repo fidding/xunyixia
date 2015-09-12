@@ -158,6 +158,7 @@ class UsersController extends Controller
     public  function info()
     {
         $user = Auth::user();
+        $user->addresscode = Excity::where('id',$user->addresscode)->first()->city;
         return View::make('users.info',['user'=>$user,'navsub'=>1]);
         
     }

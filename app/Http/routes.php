@@ -35,6 +35,7 @@ Route::get('news/loststh','NewsController@loststh');
 Route::get('news/seeksth','NewsController@seeksth');
 Route::get('news/people','NewsController@people');
 Route::get('news/pet','NewsController@pet');
+Route::get('news/types/{type}','NewsController@getNewsType');
 Route::get('news/lastNews','NewsController@lastNews');
 Route::resource('news','NewsController');
 Route::resource('photos','PhotosController');

@@ -157,18 +157,17 @@
 					{!! HTML::link('news/create','信息发布',array('id'=>''))  !!}
 				</li>
 				<li class="nav-item	@if($navsub=='2') active @endif">
-					{!! HTML::link('news/seeksth','寻物启事',array('id'=>''))  !!}
+					{!! HTML::link('news/types/seeksth','寻物启事',array('id'=>''))  !!}
 				</li>						
 				<li class="nav-item	@if($navsub=='3') active @endif">
-					{!! HTML::link('news/loststh','失物招领',array('id'=>''))  !!}
+					{!! HTML::link('news/types/loststh','失物招领',array('id'=>''))  !!}
 				</li>						
 				<li class="nav-item	@if($navsub=='4') active @endif">
-					{!! HTML::link('news/people','寻人启事',array('id'=>''))  !!}
+					{!! HTML::link('news/types/people','寻人启事',array('id'=>''))  !!}
 				</li>
 				<li class="nav-item	@if($navsub=='5') active @endif">
-					{!! HTML::link('news/pet','寻宠启事',array('id'=>''))  !!}
+					{!! HTML::link('news/types/pet','寻宠启事',array('id'=>''))  !!}
 				</li>
-				<p class="navbar-nav-slide" style=""></p>
 		</ul>
 
     </div><!-- /.navbar-collapse -->

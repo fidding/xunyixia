@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\News,
     App\User,
+    App\Type,
     App\Photo,
     App\Excity,
     App\Message;
@@ -49,7 +50,7 @@ class NewsController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(Requests\StoreNewRequest $request)
     {
         //
         $input = Input::except('image');
@@ -168,26 +169,27 @@ class NewsController extends Controller
     {
         //
     }
-    public function seeksth(){
-        $news = News::desnew(1);
-        //获取最新信息
-        $lastNews = News::lastNews();        
-        return View::make('news.desnew',['news'=>$news,'lastNews'=>$lastNews,'type'=>'寻物启事','navsub'=>2]);
-    }
-    public function loststh(){
-        $news = News::desnew(2);
-        $lastNews = News::lastNews();
-        return View::make('news.desnew',['news'=>$news,'lastNews'=>$lastNews,'type'=>'失物招领','navsub'=>3]);
-    }
-    public function people(){
-        $news = News::desnew(3);
-        $lastNews = News::lastNews();
-        return View::make('news.desnew',['news'=>$news,'lastNews'=>$lastNews,'type'=>'寻人启事','navsub'=>4]);
-    }
-    public function pet(){
-        $news = News::desnew(4);
-        $lastNews = News::lastNews();
-        return View::make('news.desnew',['news'=>$news,'lastNews'=>$lastNews,'type'=>'寻宠启事','navsub'=>5]);
+    public function getNewsType($type){
+        //类型索引
+        $types = array(
+            'seeksth' => 1,
+            'loststh' => 2,
+            'people' => 3,
+            'pet' => 4
+            );
+        if(isset($types[$type])){
+            $type_id = $types[$type];
+            //获取指定类型信息
+            $news = News::desnew($type_id);
+            //获取类型名称
+            $type_name = Type::find($type_id)->first()->type;
+            //获取最新信息
+            $lastNews = News::lastNews();        
+            return View::make('news.desnew',['news'=>$news,'lastNews'=>$lastNews,'type'=>$type_name,'navsub'=>$type_id+1]);
+        }else{
+            abort(404);
+        }
+
     }
     public function lastNews(){
         $lastNews = News::lastAllNews();

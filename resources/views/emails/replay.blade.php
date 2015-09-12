@@ -1,0 +1,2 @@
+您好,{{ $user->name }}！您发布的标题为"{{ $new->title }}"的{{ $type->type}}已有回复,点击连接查看详情<a href="{{ url('news/'.$new->id) }}">www.xunyixia.com/news/{{ $new->id }}</a></br>
+温馨提示："寻一下"不会以任何方式强制索要用户的密码以及金钱,请用户小心上当受骗,并真心祝愿您及早找回丢失的物品。

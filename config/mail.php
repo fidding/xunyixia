@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'from' => ['address' => env('MAIL_FROM_ADDRESS', '395455856@qq.com'), 'name' => env('MAIL_FROM_NAME', 'xunyixia')],
+    'from' => ['address' => env('MAIL_FROM_ADDRESS', '395455856@qq.com'), 'name' => env('MAIL_FROM_NAME', '寻一下-打造国内专业的招领网站')],
 
     /*
     |--------------------------------------------------------------------------
