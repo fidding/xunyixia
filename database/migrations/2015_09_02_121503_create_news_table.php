@@ -21,6 +21,7 @@ class CreateNewsTable extends Migration
             $table->bigInteger('user_id')->unsigned();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->string('title');//标题
+            $table->string('tag');//标签
             $table->string('description');//详细描述
             $table->integer('addresscode');//丢失、拾取、走失区域
             $table->string('address');//详细丢失、拾取、走失地址
@@ -30,8 +31,7 @@ class CreateNewsTable extends Migration
             $table->string('c_email')->nullable();//联系邮箱
             $table->string('c_phone')->nullable();//联系电话
             $table->string('c_mobilephone')->nullable();//联系手机
-            $table->string('c_qq')->nullable();//联系QQ
-            $table->string('c_wechat')->nullable();//联系微信
+            $table->decimal('reward',10,2)->default('0');//报酬
             $table->integer('click')->default('0');//访问量
             $table->boolean('isfind')->default('0');//是否寻回
             $table->timestamps();

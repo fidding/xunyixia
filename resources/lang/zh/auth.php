@@ -12,8 +12,8 @@ return [
     | these language lines according to your application's requirements.
     |
     */
-
-    'failed' => 'These credentials do not match our records.',
+    
+    'failed' => '邮箱或密码不正确。',
     'throttle' => '登录次数过多，请:seconds秒再后尝试登录。',
 
 ];

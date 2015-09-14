@@ -3,6 +3,11 @@
 登录 寻一下XunYiXia
 @stop
 @section('homecss')
+<style>
+#lr_error{
+    list-style: none;
+}
+</style>
 @stop
 @section('homejs')
 @stop
@@ -12,6 +17,17 @@
         <div class="lr-logo"></div>
         <form class="lr-form" method="POST" action="/auth/login">
             {!! csrf_field() !!}
+            @if(Session::get('msg'))
+                <div class="alert alert-danger"> {{ Session::get('msg') }}</div>
+            @endif
+            
+            @if($errors->any())
+            <ul id="lr_error" class="col-xs-12 alert alert-danger">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
             <div class="form-group">
                 <input class="form-control" type="email" name="email"  placeholder="邮箱" value="{{ old('email') }}">
             </div>
@@ -20,7 +36,7 @@
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="remember"> 记住我
+                    <input type="checkbox" name="remember" checked="checked"> 记住我
                 </label>
             </div>
             <button class="btn jh-btn-green lr-submit" type="submit">登录</button>

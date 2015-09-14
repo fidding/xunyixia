@@ -44,4 +44,8 @@ class News extends Model
         }
         return $news;  
     }
+    //获取指定用户的所有报酬
+    static function getReward($user_id){
+    	return $news = News::where('user_id',$user_id)->sum('reward');
+    }
 }

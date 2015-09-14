@@ -243,7 +243,7 @@
 			<div id="new_left_message">
 				<ul class="col-md-12">
 					<li class="from-img col-md-2">
-						<img class="new_left_avatar" src="http://localhost:9000/photos/7" />
+						<img class="new_left_avatar" src="http://localhost:9000/photos/2" />
 					</li>
 					<li class="from-img col-md-10">
 						<a>管理员</a>{{ $new->created_at }}
@@ -281,8 +281,8 @@
 			<p>发布者：{{ $user->name }}</p>
 		</div>
 		<div id="new_right_issue">
-			<h4>快捷入口</h4>
-			<a  href="{{ url('news/create') }}">信息发布</a>
+			<h4>我有消息</h4>
+			<a id="remindPoster" data-id="{{ $new->id }}">我有消息 , 提醒发布者</a>
 		</div>
 		<div id="new_right_notification">
 			<h4>最新公告<a class="issue-lookmore pull-right" href="{{ url('news/notifications') }}">更多</a></h4>
@@ -301,9 +301,28 @@
 			@endif
 		</div>
 	</div>
+	<!-- 提醒发布者模态框 -->
+	<div id="remindModal" class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">  	
+	</div>
 </div>
 @stop
 @section('homejs')
+<script type="text/javascript">
+$(function(){
+	$('#remindPoster').click(function(){
+		var id = $(this).data("id");
+		$.get("/trades/remindPoster",{ 'id':id },function(data){
+			if(data == null||data == ''){
+				alert('请先登录！');
+				return false;
+			}else{
+				$("#remindModal").empty().append(data);
+				$('#remindModal').modal('show');
+			}
+		})
+	});
+});
+</script>
 
 @stop
 

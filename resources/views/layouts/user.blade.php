@@ -99,6 +99,9 @@
                     </li>
                 </ul>
             </li>
+            <li>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">委托 ￥{{ $rewardAll }}元</a>
+            </li>
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-user"></i> {{ Auth::user()->name }} <b class="caret"></b></a>
                 <ul class="dropdown-menu">

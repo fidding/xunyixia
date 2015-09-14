@@ -32,7 +32,7 @@ class User extends Model implements AuthenticatableContract,
     /*
     *不可填充
     */
-    protected $guarded = ['method','password', 'remember_token'];
+    protected $guarded = ['method', 'remember_token'];
     /**
      * The attributes excluded from the model's JSON form.
      *

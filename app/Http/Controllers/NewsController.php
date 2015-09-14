@@ -17,10 +17,13 @@ use Auth,
     View,
     Input,
     Session,
-    Response;
-
+    Response,
+    Redirect;
 class NewsController extends Controller
 {
+    public function __construct(){
+        $this->middleware('login',['only'=>array('store','step1','step2','step3','step4')]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,8 +53,70 @@ class NewsController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Requests\StoreNewRequest $request)
+    public function store(Request $request)
     {
+        $step = Input::get('step');
+        switch ($step) {
+            case '1':
+                $type_id = Input::get('type_id');
+                Session::put('type_id', $type_id);
+                return Redirect::to('news/create/step2');
+                break;
+            case '2':
+                    $type_id = Session::get('type_id');
+                    $input = Input::except('image','step');
+                    $images = Input::file('image');
+                    $input['time'] = strtotime($input['time']);
+                    $new = new News();
+                    $new->fill($input);
+                    $new->type_id = $type_id;
+                    $new->user_id = Auth::id();
+                    $new->save();
+
+                    //设置session
+                    Session::put('new_id', $new->id);
+                    if($images){
+                        if($images[0] != null){
+                            foreach($images as $image){
+                                $fileSize = $image->getSize();
+                                $entension = $image->getClientOriginalExtension(); //上传文件的后缀.
+                                if($entension!='jpg'&&$entension!='png'&&$entension!='gif'&&$entension!='jpeg'&&$entension!='tiff'&&$entension!='bmp'&&$entension!='psd')
+                                {
+                                    return Redirect::back()->with('msg', '请选择正确的格式文件');
+                                }
+                               if($fileSize>4000000){
+                                    return Redirect::back()->with('msg', '请上传小于4M的文件');
+                                }
+                                $clientName = $image -> getClientOriginalName();//源文件名
+                                $tmpName = $image ->getFileName(); // 缓存在tmp文件夹中的文件名 
+                                $realPath = $image -> getRealPath();    //这个表示的是缓存在tmp文件夹下的文件的绝对路径
+                                $newName = md5_file($realPath).'.'.$entension;
+                                $path = $image -> move(storage_path('newphoto').'/'.$entension,$newName);
+                                $photo = new Photo();
+                                $photo->new_id = $new->id;
+                                $photo->filename = '/'.$entension.'/'.$newName;
+                                $photo->oldname = $clientName;
+                                $photo->save();  
+                            }                
+                        }
+                    }
+                    return Redirect::to('news/create/step3');
+                break;
+            case '3':
+                    Session::put('reward',Input::get('reward'));
+                    return Redirect::to('news/create/step4');
+            case '4':   
+                    $news = News::find(Session::get('new_id'));
+                    $news->reward = Session::get('reward');
+                    $news->save();
+                    Session::flush();//清空整个 Session
+                    return '托管报酬完成';
+                break;
+            default:
+                return '操作失误，请返回';
+                break;
+        }
+        dd($input);
         //
         $input = Input::except('image');
         $images = Input::file('image');
@@ -66,22 +131,18 @@ class NewsController extends Controller
         $new->save();
         if($images){
             if($images[0] == null){
-                $response=array('status'=>0,'message'=>'请选择正确的格式文件');
-                return Response::json($response);
+                return Redirect::back()->with('msg', '请选择正确的格式文件');
             }
             else{
                 foreach($images as $image){
                     $fileSize = $image->getSize();
                     $entension = $image->getClientOriginalExtension(); //上传文件的后缀.
-            
-                    if($fileSize>20971520){
-                        $response=array('status'=>0,'message'=>'请上传小于20M的文件');
-                        return Response::json($response);
-                        //return "<script language='javascript'>parent.UploadCallback('" . json_encode(array('status'=>0,'message'=>'请上传小于20M的文件')) . "')</script>";
+                    if($entension!='jpg'&&$entension!='png'&&$entension!='gif'&&$entension!='jpeg'&&$entension!='tiff'&&$entension!='bmp'&&$entension!='psd')
+                    {
+                        return Redirect::back()->with('msg', '请选择正确的格式文件');
                     }
                    if($fileSize>4000000){
-                        $response=array('status'=>0,'message'=>'请上传小于4M的文件');
-                        return Response::json($response);
+                        return Redirect::back()->with('msg', '请上传小于4M的文件');
                     }
                     $clientName = $image -> getClientOriginalName();//源文件名
                     $tmpName = $image ->getFileName(); // 缓存在tmp文件夹中的文件名 
@@ -96,6 +157,7 @@ class NewsController extends Controller
                 }                
             }
         }
+        return View::make('home');
     }
 
     /**
@@ -194,5 +256,40 @@ class NewsController extends Controller
     public function lastNews(){
         $lastNews = News::lastAllNews();
         return View::make('news.desnew',['news'=>$lastNews,'lastNews'=>$lastNews,'type'=>'最新信息','navsub'=>1]);
+    }
+    public function step1(){
+        $lastNews = News::lastNews();
+        return View::make('news.issue.step1',['lastNews'=>$lastNews,'navsub'=>'1']);
+    }
+    public function step2(){
+        if(Session::has('type_id')){
+            $type_id = Session::get('type_id');
+            $lastNews = News::lastNews();
+            return View::make('news.issue.step2',['lastNews'=>$lastNews,'type_id'=>$type_id,'navsub'=>'1']);
+        }else{
+            return Redirect::to('news/create/step1');
+        }
+    }
+    public function step3(){
+        if(Session::has('new_id')){
+            $lastNews = News::lastNews();
+            return View::make('news.issue.step3',['lastNews'=>$lastNews,'navsub'=>'1']);       
+        }else{
+            return Redirect::to('news/create/step2');
+        }        
+        
+    }
+    public function step4(){
+        if(Session::has('reward')){
+            $type_id = Session::get('type_id');
+            $news = News::find(Session::get('new_id'));
+            $reward = Session::get('reward');
+            $lastNews = News::lastNews();
+            return View::make('news.issue.step4',['type_id'=>$type_id,'reward'=>$reward,'news'=>$news,'lastNews'=>$lastNews,'navsub'=>'1']);             
+        }else{
+            return Redirect::to('news/create/step3');
+        }
+
+        
     }
 }

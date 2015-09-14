@@ -133,6 +133,28 @@ body{
 	background: #4fae7b;
 	text-decoration: none;		
 }
+.jh-btn-blue{
+	color: #fff;
+	background: #2489C5;
+    border: #3B4B54;
+    border-radius: 0px;
+}
+.jh-btn-blue:hover{
+	color: #fff;
+	text-decoration: none;
+	background: #2684BB
+}
+.jh-btn-gray{
+	color: #999;
+	background: #eee;
+    border: #eee;
+    border-radius: 0px;
+}
+.jh-btn-gray:hover{
+	color: #999;
+	text-decoration: none;
+	background: #efefef
+}
 /* 
 *主页
  */

@@ -6,9 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Photo;
-use Response;
-class PhotosController extends Controller
+use Auth,
+    Input,
+    View;
+class TradesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -50,9 +51,6 @@ class PhotosController extends Controller
     public function show($id)
     {
         //
-        $photo = Photo::find($id);
-        $file = storage_path('newphoto'.$photo->filename);
-        return Response::download($file,'photo.jpg',array('Content-Type'=>'image/jpeg'),'inline');
     }
 
     /**
@@ -88,4 +86,15 @@ class PhotosController extends Controller
     {
         //
     }
+    //提醒
+    public function remindPoster(){
+        if(Auth::check()){
+            $user = Auth::user();
+            $new_id = Input::get('id');
+            return View::make('trades.contact',['user'=>$user]);
+        }else{
+            return null;
+        }
+    }
+
 }

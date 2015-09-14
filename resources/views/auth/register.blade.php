@@ -3,6 +3,11 @@
 注册 寻一下XunYiXia 
 @stop
 @section('homecss')
+<style>
+#lr_error{
+    list-style: none;
+}
+</style>
 @stop
 @section('homejs')
 @stop
@@ -12,6 +17,13 @@
         <div class="lr-logo"></div>
         <form class="lr-form" method="POST" action="/auth/register">
             {!! csrf_field() !!}
+            @if($errors->any())
+            <ul id="lr_error" class="col-xs-12 alert alert-danger">
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif            
             <div class="form-group">
                 <input class="form-control" type="name" name="name"  placeholder="用户名" value="{{ old('name') }}">
             </div>
@@ -20,9 +32,6 @@
             </div>
             <div class="form-group">
                 <input class="form-control" type="password" name="password" id="password"  placeholder="密码">
-            </div>
-            <div class="form-group">
-                <input class="form-control" type="password" name="password_confirmation"  placeholder="确认密码">
             </div>
             <button class="btn jh-btn-green lr-submit" type="submit">注册</button>
             <p>

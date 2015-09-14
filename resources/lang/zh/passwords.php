@@ -12,7 +12,6 @@ return [
     | has failed, such as for an invalid token or invalid new password.
     |
     */
-
     'password' => '密码必须符合要求，并且不能少于6位。',
     'reset' => '密码已重置！',
     'sent' => '忘记密码邮件已发送！',

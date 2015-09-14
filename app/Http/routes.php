@@ -38,6 +38,12 @@ Route::get('news/pet','NewsController@pet');
 Route::get('news/types/{type}','NewsController@getNewsType');
 Route::get('news/lastNews','NewsController@lastNews');
 Route::resource('news','NewsController');
+
+Route::get('news/create/step1','NewsController@step1');
+Route::get('news/create/step2','NewsController@step2');
+Route::get('news/create/step3','NewsController@step3');
+Route::get('news/create/step4','NewsController@step4');
+
 Route::resource('photos','PhotosController');
 //用户中心
 Route::get('users/info','UsersController@info');
@@ -48,6 +54,8 @@ Route::resource('users','UsersController');
 Route::resource('message','MessagesController');
 //消息反馈
 Route::resource('feedback','FeedbacksController');
-
+//交易
+Route::get('trades/remindPoster','TradesController@remindPoster');
+Route::get('trades/remindPoster/contact','TradesController@contact');
 
 

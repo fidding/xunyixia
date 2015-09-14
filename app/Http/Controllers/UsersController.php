@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\User,
+    App\News,
     App\Excity,
     App\Message,
     App\Project;
@@ -158,8 +159,11 @@ class UsersController extends Controller
     public  function info()
     {
         $user = Auth::user();
-        $user->addresscode = Excity::where('id',$user->addresscode)->first()->city;
-        return View::make('users.info',['user'=>$user,'navsub'=>1]);
+        $rewardAll = News::getReward($user->id);
+        if($user->addresscode){
+            $user->addresscode = Excity::where('id',$user->addresscode)->first()->city;
+        }
+        return View::make('users.info',['user'=>$user,'rewardAll'=>$rewardAll,'navsub'=>1]);
         
     }
     
