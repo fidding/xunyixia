@@ -39,6 +39,7 @@ class User extends Model implements AuthenticatableContract,
      * @var array
      */
     protected $hidden = ['password', 'remember_token'];
+    
     public function news()
     {
         return $this->hasMany('App\News');//数据连接
@@ -47,4 +48,10 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasMany('App\Message');//数据连接
     }
+    public function proposeTrades(){
+        return $this->hasMany('App\TradesRecord','proposeUser');
+    }
+    public function receiveTrades(){
+        return $this->hasMany('App\TradesRecord','receiveUser');
+    }    
 }

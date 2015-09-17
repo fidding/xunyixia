@@ -132,10 +132,13 @@
                 </li>                
                 <li>
                     <a href="javascript:;" data-toggle="collapse" data-target="#navbar_lost"><i class="icon-folder-open"></i> 我的启事 <i class="pull-right icon-caret-down"></i></a>
-                    <ul id="navbar_lost" class="">
+                    <ul id="navbar_lost" class="collapse">
                         <li>
                             <a href="#">寻人启事</a>
                         </li>
+                        <li>
+                            <a href="#">失物招领</a>
+                        </li>                         
                         <li>
                             <a href="#">寻物启事</a>
                         </li>
@@ -145,18 +148,34 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;" data-toggle="collapse" data-target="#navbar_find"><i class="icon-folder-open-alt"></i> 我的招领 <i class="pull-right icon-caret-down"></i></a>
-                    <ul id="navbar_find" class="collapse">
+                    <a href="javascript:;" data-toggle="collapse" data-target="#navbar_trade"><i class="icon-shopping-cart"></i> 我的交易 <i class="pull-right icon-caret-down"></i></a>
+                    <ul id="navbar_trade" class="collapse">
                         <li>
-                            <a href="#">失物招领</a>
-                        </li>                      
+                            <a href="{{ url('trades/receive') }}">收到的交易</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('trades/propose') }}">提出的交易</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('trades/success') }}">成功的交易</a>
+                        </li>
+                        <li>
+                            <a href="{{ url('trades/fail') }}">取消的交易</a>
+                        </li>
+                        
                     </ul>
+                </li>  
+                <li>
+                    <a href="{{ url('users/collection') }}"><i class="icon-bookmark-empty"></i> 我的收藏</a>
+                </li>                               
+                <li>
+                    <a href="{{ url('users/emailrecord') }}"><i class="icon-envelope-alt"></i> 邮件中心</a>
                 </li> 
                 <li class="">
-                    <a href="{{ url('users/information') }}"><i class="icon-bell-alt"></i>信息中心</a>
+                    <a href="{{ url('users/information') }}"><i class="icon-bell"></i>信息中心</a>
                 </li>                    
                 <li class="">
-                    <a href="{{ url('feedback/create') }}"><i class="icon-envelope"></i>意见反馈</a>
+                    <a href="{{ url('feedback/create') }}"><i class="icon-comment-alt"></i>意见反馈</a>
                 </li>                                              
             </ul>
         </div>

@@ -1,3 +1,26 @@
+<script>
+	$(function(){
+		$("#remindTrue").click(function(){
+			$("#remindTrue").attr("disabled", true); 
+			var data = $("#contact_form").serialize();
+			$.ajax({
+				type : "post",
+				url : "/trades",
+				data: data,
+				success : function(result){
+					console.log(result);
+					if(result.status){
+						alert(result.msg);
+						$("#remindModal").modal('hide').empty();
+					}
+					else{
+						alert('未知的情况发生,请刷新后重试！');
+					}
+				}
+			});
+		});
+	});
+</script>
 <div class="modal-dialog" role="document">
 	<div class="modal-content">
 		<div class="modal-header">
@@ -5,7 +28,9 @@
 		<h4 class="modal-title" id="myModalLabel">请填写您的联系方式,以方便联系</h4>
 		</div>
 		<div class="modal-body">
-			{!! Form::model($user, ['method'=>'PUT','id'=>'info_form','class'=>'form-horizontal clearfix','action'=>array('UsersController@update')]) !!}
+			{!! Form::model($user, ['method'=>'post','id'=>'contact_form','class'=>'form-horizontal clearfix','action'=>array('TradesController@store')]) !!}
+				{!! Form::hidden('new_id',$new_id) !!}
+				{!! Form::hidden('receive_id',$receive_id) !!}
 				<div class="form-group">
 					<label class="col-md-2 control-label" for="name"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 姓名</label>
 					<div class="col-md-9">
@@ -34,7 +59,8 @@
 		</div>
 		<div class="modal-footer">
 		<button type="button" class="btn btn-default" data-dismiss="modal">取消提醒</button>
-		<button type="button" class="btn btn-primary">确认提醒</button>
+		<button id="remindTrue" type="button" class="btn btn-primary">确认提醒</button>
 		</div>
+		
 	</div>
   </div>

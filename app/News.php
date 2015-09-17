@@ -18,6 +18,9 @@ class News extends Model
 	public function type(){
 		return $this->belongsTo('App\Type');
 	}
+    public function tradesRecord(){
+        return $this->hasMany('App\TradesRecord');
+    }
 	//返回最新信息数据,10条数据
 	static function lastNews(){
 		$news = new News;

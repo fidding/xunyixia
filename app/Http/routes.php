@@ -57,5 +57,8 @@ Route::resource('feedback','FeedbacksController');
 //交易
 Route::get('trades/remindPoster','TradesController@remindPoster');
 Route::get('trades/remindPoster/contact','TradesController@contact');
+Route::resource('trades/receive','TradesController@receive');//收到的交易
+Route::resource('trades','TradesController');
+
 
 

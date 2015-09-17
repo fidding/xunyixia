@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(CitySeeder::class);
         $this->call(TypeTableSeeder::class);
         $this->call(UserTableSeeder::class);
+        $this->call(TradeTableSeeder::class);
         $this->command->info('Excity table seeded!');
         Model::reguard();
     }
