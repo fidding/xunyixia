@@ -28,5 +28,21 @@ $(function(){
 		}else{
 			$('.navbar').removeClass('navbar-white');
 		}
-	} 
+	}  
+	if($('#home-news-container')){
+		$('#home-news-container').masonry({
+		   itemSelector : '.item'    
+		}); 		
+	}
+	//图片轮播	
+	if($('#owl-example').length>0){
+		$("#owl-example").owlCarousel({
+			autoPlay: 4000, //Set AutoPlay to 4 seconds
+			items : 6,
+			itemsDesktop : [1199,3],
+			itemsDesktopSmall : [979,3],
+			stopOnHover:false
+	  });		
+	}
+
 })

@@ -1,6 +1,7 @@
 <style>
 .footer{
-	background-color:#f8f8f8;
+	background-color:#333;
+	margin-top:20px;
 	padding:50px 0px 0px 0px;
 }
 .footer-left{
@@ -14,6 +15,7 @@
 	vertical-align:top;
 }
 .footer-content div h5{
+	color:#666;
 	font-weight: bold;
 }
 .footer-content div img{
@@ -32,7 +34,7 @@
 	text-decoration: none;
 }
 .footer-content ul li a:hover{
-	color:#333;
+	color:#ffffff;
 }
 .footer-copyright{
 	border-top:1px solid #c8c8c8;
