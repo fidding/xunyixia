@@ -1,12 +1,15 @@
 @extends('layouts.home')
 @section('title')
-注册 寻一下XunYiXia 
+注册 寻一下XunYiXia
 @stop
 @section('homecss')
 <style>
 #lr_error{
     list-style: none;
-}
+ }
+ .footer{
+     display:none;
+ }
 </style>
 @stop
 @section('homejs')
@@ -23,7 +26,7 @@
                     <li>{{ $error }}</li>
                 @endforeach
             </ul>
-            @endif            
+            @endif
             <div class="form-group">
                 <input class="form-control" type="name" name="name"  placeholder="用户名" value="{{ old('name') }}">
             </div>

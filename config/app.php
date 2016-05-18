@@ -197,7 +197,7 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
         'Form'      => 'Illuminate\Html\FormFacade',
         'HTML'      => 'Illuminate\Html\HtmlFacade',
-        'Date'      => 'Jenssegers\Date\Date',        
+        'Date'      => 'Jenssegers\Date\Date',
 
     ],
 

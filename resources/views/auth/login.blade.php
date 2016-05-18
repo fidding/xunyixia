@@ -6,7 +6,10 @@
 <style>
 #lr_error{
     list-style: none;
-}
+ }
+ .footer{
+     display:none;
+ }
 </style>
 @stop
 @section('homejs')
@@ -20,7 +23,7 @@
             @if(Session::get('msg'))
                 <div class="alert alert-danger"> {{ Session::get('msg') }}</div>
             @endif
-            
+
             @if($errors->any())
             <ul id="lr_error" class="col-xs-12 alert alert-danger">
                 @foreach($errors->all() as $error)
@@ -50,7 +53,3 @@
     </div>
 </div>
 @stop
-
-
-
-

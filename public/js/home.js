@@ -1,8 +1,8 @@
 $(function(){
 	//导航栏序号大于0
-	if(navsub){
-		$('.navbar').css('background-color','#2B2B37');	
-	}
+	/* if(navsub){
+	   $('.navbar').css('background-color','#2B2B37');
+	   }*/
 	//主页图片
 	if($('.home-container').length>0){
 	    $('.home-container').height($(window).height()).backstretch("../img/bg-top.jpg");
@@ -20,21 +20,21 @@ $(function(){
 		$('.logo').attr('src','../img/logo-translucent.png');
 	}
 	//滚动事件
-	window.onscroll = function(){ 
-	    var t = document.documentElement.scrollTop || document.body.scrollTop;  
+	window.onscroll = function(){
+	    var t = document.documentElement.scrollTop || document.body.scrollTop;
 		//整体导航栏样式切换
 		if(t>=100){
 			$('.navbar').addClass('navbar-white');
 		}else{
 			$('.navbar').removeClass('navbar-white');
 		}
-	}  
+	}
 	if($('#home-news-container')){
 		$('#home-news-container').masonry({
-		   itemSelector : '.item'    
-		}); 		
+		   itemSelector : '.item'
+		});
 	}
-	//图片轮播	
+	//图片轮播
 	if($('#owl-example').length>0){
 		$("#owl-example").owlCarousel({
 			autoPlay: 4000, //Set AutoPlay to 4 seconds
@@ -42,7 +42,7 @@ $(function(){
 			itemsDesktop : [1199,3],
 			itemsDesktopSmall : [979,3],
 			stopOnHover:false
-	  });		
+	  });
 	}
 
 })
